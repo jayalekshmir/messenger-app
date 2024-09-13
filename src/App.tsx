@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     scrollToBottom();
     updateFriendsList();
-  }, [chats]);
+  }, [chats, selectedFriend]);
 
   const sendMessage = (friend: string, message: string) => {
     setChats((prevChats) => ({
