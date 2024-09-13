@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { ChatContext } from "../App";
-import { friends } from "../utils/constants";
 
 function FriendsList() {
   const context = useContext(ChatContext);
@@ -9,14 +8,20 @@ function FriendsList() {
     return null;
   }
 
-  const { setSelectedFriend } = context;
+  const { setSelectedFriend, selectedFriend, friendsList } = context;
 
   return (
-    <div className="friends-list flex flex-col w-1/6">
-      <h3>Friends</h3>
-      <ul>
-        {friends.map((friend: string) => (
-          <li key={friend} onClick={() => setSelectedFriend(friend)}>
+    <div className="friends-list flex flex-col w-1/6 m-2">
+      <h3 className="text-xl font-bold">Friends</h3>
+      <ul className="mt-4">
+        {friendsList.map((friend: string) => (
+          <li
+            key={friend}
+            onClick={() => setSelectedFriend(friend)}
+            className={`mt-2 p-1 cursor-pointer ${
+              selectedFriend === friend ? `bg-lime-200 rounded` : ``
+            }`}
+          >
             {friend}
           </li>
         ))}

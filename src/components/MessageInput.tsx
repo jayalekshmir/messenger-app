@@ -11,22 +11,24 @@ function MessageInput() {
 
   const { selectedFriend, sendMessage } = context;
 
-  const handleSend = () => {
-    if (message.trim() && selectedFriend) {
-      sendMessage(selectedFriend, message);
-      setMessage("");
-    }
+  const handleSend = (event: any) => {
+    if (event.key === "Enter")
+      if (message.trim() && selectedFriend) {
+        sendMessage(selectedFriend, message);
+        setMessage("");
+      }
   };
 
   return (
-    <div className="message-input">
+    <div className="h-12 mx-4">
       <input
+        className="message-input flex w-full h-full text-lg border rounded-md p-2"
         type="text"
-        placeholder="Type your message..."
+        placeholder="Type your message and Press Enter..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={handleSend}
       />
-      <button onClick={handleSend}>Send</button>
     </div>
   );
 }

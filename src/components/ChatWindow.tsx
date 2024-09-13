@@ -9,7 +9,7 @@ function ChatWindow() {
     return null;
   }
 
-  const { selectedFriend, chats } = context;
+  const { selectedFriend, chats, chatEndRef } = context;
 
   if (!selectedFriend) {
     return (
@@ -20,21 +20,26 @@ function ChatWindow() {
   }
 
   return (
-    <div className="chat-window flex flex-col w-5/6">
-      <h3>Chat with {selectedFriend}</h3>
-      <div className="messages">
-        {chats[selectedFriend].map((message: Message, index: number) => (
-          <div
-            key={index}
-            className={
-              message.sender === "Me" ? "my-message" : "friend-message"
-            }
-          >
-            <strong>{message.sender}:</strong> {message.text}
-          </div>
-        ))}
+    <div className="chat-window flex flex-col w-5/6 justify-between m-2">
+      <h3 className="text-xl font-bold text-right mx-4 px-2">
+        {selectedFriend}
+      </h3>
+      <div className="flex flex-col">
+        <div className="messages bg-gray-300 m-4 p-4">
+          {chats[selectedFriend].map((message: Message, index: number) => (
+            <div
+              key={index}
+              className={`mt-4 p-2 ${
+                message.sender === "Me" ? "text-right " : "text-left "
+              }`}
+            >
+              {message.text}
+            </div>
+          ))}
+          <div ref={chatEndRef}></div>
+        </div>
+        <MessageInput />
       </div>
-      <MessageInput />
     </div>
   );
 }
