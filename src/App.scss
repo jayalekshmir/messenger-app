@@ -1,2 +1,9 @@
-.App {
+.app {
+  height: 96vh;
+}
+
+.messages {
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
